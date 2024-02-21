@@ -3,36 +3,57 @@ import { MenuButton } from "../Menu/MenuButton";
 import { MenuDropdown } from "../Menu/MenuDropdown";
 import { MenuItem } from "../Menu/MenuItem";
 import { FC, useState } from "react";
+import { companyArray, featuresArray } from "../../data";
 
 export interface NavbarProps {
   handleClick: () => void;
-  isOn: boolean;
+  isFeatureOn: boolean;
   menuArray: string[];
 }
 
 export const Navbar: FC = () => {
-  const menuArray: string[] = [
-    "Cilike",
-    "Milike",
-    "Cecília",
-    "Miller",
-    "Milcsi",
-    "Cilcsi",
-  ];
-  const [isOn, setIsOn] = useState<boolean>(false);
-  const handleMenuClick = () => {
-    setIsOn((prevOn) => !prevOn);
+  const [isFeatureOn, setIsFeatureOn] = useState<boolean>(false);
+  const [isCompanyOn, setIsCompanyOn] = useState<boolean>(false);
+  const handleFeatureClick = () => {
+    setIsFeatureOn((prevOn) => !prevOn);
+    // setIsCompanyOn(false);
+  };
+
+  const handleCompanyClick = () => {
+    setIsCompanyOn((prevOn) => !prevOn);
+    // setIsFeatureOn(false);
   };
   return (
-    <Menu>
-      <MenuButton onClick={handleMenuClick}>
-        I am the Menu Button please click
-      </MenuButton>
-      <MenuDropdown isOn={isOn}>
-        {menuArray.map((item) => (
-          <MenuItem key={item}>{item}</MenuItem>
-        ))}
-      </MenuDropdown>
-    </Menu>
+    <div>
+      <Menu>
+        <MenuButton onClick={handleFeatureClick}>Features</MenuButton>
+        <MenuDropdown isFeatureOn={isFeatureOn}>
+          <ul>
+            {featuresArray.map((feature) => (
+              <MenuItem key={feature.text}>
+                <li>
+                  {feature.icon}
+                  <a href="#">{feature.text}</a>
+                </li>
+              </MenuItem>
+            ))}
+          </ul>
+        </MenuDropdown>
+      </Menu>
+      <Menu>
+        <MenuButton onClick={handleCompanyClick}>Company</MenuButton>
+        <MenuDropdown isCompanyOn={isCompanyOn}>
+          <ul>
+            {companyArray.map((item) => (
+              <MenuItem key={item.text}>
+                <li>
+                  <a href="#">{item.text}</a>
+                </li>
+              </MenuItem>
+            ))}
+          </ul>
+        </MenuDropdown>
+      </Menu>
+    </div>
   );
 };

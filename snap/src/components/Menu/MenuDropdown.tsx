@@ -2,8 +2,17 @@ import { FC, ReactNode } from "react";
 
 export interface MenuDropdownProps {
   children: ReactNode;
-  isOn: boolean;
+  isFeatureOn?: boolean;
+  isCompanyOn?: boolean;
 }
-export const MenuDropdown: FC<MenuDropdownProps> = ({ children, isOn }) => {
-  return <div className="menu--dropdown">{isOn ? children : null}</div>;
+export const MenuDropdown: FC<MenuDropdownProps> = ({
+  children,
+  isFeatureOn,
+  isCompanyOn,
+}) => {
+  return (
+    <div className="menu--dropdown">
+      {isFeatureOn || isCompanyOn ? children : null}
+    </div>
+  );
 };
