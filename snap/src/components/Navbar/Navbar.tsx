@@ -4,6 +4,7 @@ import { MenuDropdown } from "../Menu/MenuDropdown";
 import { MenuItem } from "../Menu/MenuItem";
 import { FC, useState } from "react";
 import { companyArray, featuresArray } from "../../data";
+import { Button } from "../Button/Button";
 
 export interface NavbarProps {
   handleClick: () => void;
@@ -54,6 +55,8 @@ export const Navbar: FC = () => {
           </ul>
         </MenuDropdown>
       </Menu>
+      <Button>Careers</Button>
+      <Button>About</Button>
     </div>
   );
 };
